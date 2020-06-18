@@ -1,0 +1,34 @@
+@import '../../assets/styles/variables';
+
+.calendar {
+  height: 100vh;
+  overflow: hidden;
+
+  .calendar__selected-date {
+    width: 30px;
+    height: 30px;
+  }
+
+  .calendar__date {
+    overflow: hidden;
+    padding-bottom: 35px;
+    width: calc(100% / 7);
+    max-height: calc(100% / 5) !important;
+  }
+
+  .calendar__reminders-container {
+    height: 100%;
+    overflow: auto;
+  }
+
+  table {
+    height: 92%;
+
+    td {
+      &:hover {
+        cursor: pointer;
+        background-color: $light;
+      }
+    }
+  }
+}
