@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Reminder from '../Reminder';
-import { getReminders, getRemindersModalStatus } from '../../redux/selectors/reminders';
+import { getReminders } from '../../redux/selectors/reminders';
 import { updateSelectedDate } from '../../redux/actions/dates';
 import { updateRemindersModalStatus } from '../../redux/actions/reminders';
 import { getDate, getMonth, getCurrentMonth, getYear, getcurrentDate } from '../../redux/selectors/dates';
@@ -42,7 +42,7 @@ const Cell = React.memo((props) => {
         <div className="calendar__reminders-container col mt-1">
           <div className="row">
             {
-              !props.isRemindersModalOpen && props.reminders[getFormattedDate()] &&
+              props.reminders[getFormattedDate()] &&
               _.map(
                 _.sortBy(props.reminders[getFormattedDate()], 'time'),
                  reminder => <Reminder key={ reminder.id } content={ reminder } />
@@ -62,7 +62,6 @@ Cell.propTypes = {
   dayInMonth: PropTypes.number.isRequired,
   currentDate: PropTypes.string.isRequired,
   currentMonth: PropTypes.string.isRequired,
-  isRemindersModalOpen: PropTypes.bool.isRequired,
   updateRemindersModalStatus: PropTypes.func.isRequired,
 };
 
@@ -73,6 +72,5 @@ export default connect(state => ({
   reminders: getReminders(state),
   currentDate: getcurrentDate(state),
   currentMonth: getCurrentMonth(state),
-  isRemindersModalOpen: getRemindersModalStatus(state),
 }),
 { updateRemindersModalStatus, updateSelectedDate })(Cell);
